@@ -24,7 +24,7 @@ Aircraft.flapped   = [0 1
 Aircraft.flp_frac  = [0    0.2     
                       0.2  0
                       0.2  0];    % Indicates the chord fraction occupied by the flap at eah partition.  If partition is UNFLAPPED then set to 0.
-Aircraft.spn       = [4.2  5.7
+Aircraft.spn       = [4.5  5.7
                       3    0
                       1.75 0];      % Span (including the symmetric part if exists) of each partition of each wing
 Aircraft.root_chrd = [1.5
@@ -49,6 +49,20 @@ Aircraft.airfoil   = {0 0;         % Sets the airfoil shape for each partition o
                       0 0;         % User defined airfoils can be used, if they are in the same folder as the path.  Example 'Ag37.dat'.  
                       0 0};      % Airfoils are defined as an X-Y column matrix going continuously from TE to LE and all the way back to TE. 
 
+
+% Define airfoild drag polar with parabolic approximation: cd = cd_0 + cd_1*cl + cd_2*cl^2
+% Assume NACA 2412 for main wing, and NACA 0009 for horizontal and vertical tail
+Aircraft.cd_0 = [0.0151 0.0151
+                 0.0157 0 
+                 0.0157 0];
+Aircraft.cd_1 = [-0.0126 -0.0126
+                 -0.0052 0 
+                 -0.0052 0];
+Aircraft.cd_2 = [0.0083 0.0083
+                 0.0055 0 
+                 0.0055 0];
+
+                  
 Aircraft.wng_con_surf            = [0];       % Indicating which wings are full control surfaces.  The whole wing is rotated.
 Aircraft.wng_con_surf_axis_rot   = [0 1 0];   % Specifying the axis of rotation of each full wing control surface.
 Aircraft.con_surf_group   = [1                % Indicates grouping of control surfaces and symmetric/anti-symmetric relation

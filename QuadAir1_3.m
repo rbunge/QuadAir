@@ -1002,6 +1002,12 @@ wing_strip = sum(spn_div(:,:,1),2).*(symmetry+1);
 for i = 2:size(wing_strip,1)
     wing_strip(i) = wing_strip(i) + wing_strip(i-1); 
 end
+aux0 = spn_div(:,:,1).*repmat(symmetry+1,1,size(spn,2));
+aux1 = reshape(aux0',size(spn_div(:,:,1),1)*size(spn_div(:,:,1),2),1); 
+aux2 = cumsum(aux1);
+part_strip = reshape(aux2, size(spn_div(:,:,1),2), size(spn_div(:,:,1),1))';
+% part_strip is used to maps strips to partitions
+
 for i = 1:N
     
     % Read y,z coord
@@ -1028,7 +1034,11 @@ for i = 1:N
         % the twist of the strip (NOTE: this only works for wing with
         % constant twist, i.e. a constant offset angle
         wing = find(s <= wing_strip, 1);
-        Strip.twist(s) = twst_ang(wing,1);
+        part = find(s <= part_strip(wing,:),1);
+        Strip.twist(s) = twst_ang(wing,part);
+        Strip.wing(s) = wing;
+        Strip.part(s) = part;
+        
         xyzG.Panel_strip(i) = s;
         xyzG.Strip_panel{s} = [i];
     else 
