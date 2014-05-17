@@ -1,5 +1,5 @@
 %% Example - compute aerodynamic force and moment for a Cessna 152, using QuadAir
-
+clear all
 %% 1. Define Aicraft geometry and discretization: run Cessna152Example.m
 Cessna152Example
 

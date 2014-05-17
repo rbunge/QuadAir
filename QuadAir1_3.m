@@ -333,6 +333,8 @@ for wng = 1:N_wng
                     flap = flap + 1;
                     Flap_DOF_pointer(flap,:) = [DOF_i DOF_f];  % Storing the DOF's corresponding to each flap
                     flap_axis_rot(flap,:)    = flap_axis_rot(flap-1,:)*Reflect_x;  % Establishes the axis of rotation for the symmetric flap, by reflecting the axis of the previous one
+                    flap_hinge1(flap,:) = flap_hinge1(flap-1,:)*Reflect_x;
+                    flap_hinge2(flap,:) = flap_hinge2(flap-1,:)*Reflect_x;
                 end
             end
             
